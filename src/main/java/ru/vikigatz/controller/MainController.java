@@ -6,41 +6,67 @@ import ru.vikigatz.service.StudentService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Logger;
 
 @RequestScoped
-@Path("/main")
+@Path("main")
 public class MainController {
+
+    @Inject
+    private Logger logger;
 
     @Inject
     private StudentRepository studentRepository;
 
-    @Inject
-    private StudentService studentService;
-
+    /*
+    http://127.0.0.1:8080/brandMaker/app/main/all
+    */
     @GET
-    @Path("/all")
+    @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Student> getAllStudent(){
+    public List<Student> getAllStudent() {
+        logger.info("Call /all");
         return studentRepository.getAll();
     }
 
     @GET
-    @Path("/{id}")
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Student getUserById(@PathParam("id") long id){
-        return  studentRepository.getById(id);
+    public Response getStudentById(@PathParam("id") Long id) {
+        logger.info("Call /{" + id + "}");
+        Student student = studentRepository.getById(id);
+        if (Objects.isNull(student))
+            return Response.status(404).build();
+        return Response.ok(student).build();
     }
 
-    @GET
-    @Path("/")
-    @Produces("application/json")
-    public String hello() {
-        return "hello";
+    @DELETE
+    @Path("delete_id={id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void deleteStudentById(@PathParam("id") Long id) {
+        logger.info("Call /delete_id={" + id + "}");
+        studentRepository.removeStudentById(id);
     }
+
+    /*
+    curl -h" : "2000-07-31", "email" : "vova@gmail.com", "firstName" : "Vladimir", "lastName" : "Gatsulia"}' 'localhost:8080/brandMaker/app/main/add'
+    */
+    @PUT
+    @Path("add")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void add(Student student) {
+        logger.info("Call /add");
+        studentRepository.addStudent(student);
+    }
+
 }
+/*
+mvn wildfly:deploy
+mvn wildfly:redeploy
+mvn wildfly:undeploy
+ */
