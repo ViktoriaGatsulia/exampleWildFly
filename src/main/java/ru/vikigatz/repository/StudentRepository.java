@@ -8,12 +8,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.logging.Logger;
 
-
+@Transactional
 @ApplicationScoped
 public class StudentRepository {
 
@@ -49,7 +49,7 @@ public class StudentRepository {
 
     public void addStudent(Student student) {
         logger.info("SOOOOOOOOOOOOS + " + Objects.isNull(student));
-        entityManager.persist(student);
+        entityManager.merge(student);
         logger.info("Add new student: " + student.toString());
     }
 
