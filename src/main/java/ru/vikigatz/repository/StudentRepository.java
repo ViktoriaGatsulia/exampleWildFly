@@ -47,13 +47,17 @@ public class StudentRepository {
     }
 
     public void addStudent(Student student) {
+        if (Objects.isNull(student)) {
+            logger.info("Impossible add incorrect student");
+            return;
+        }
+        if (Objects.isNull(student.getDateOfBirth()) || Objects.isNull(student.getEmail()) || Objects.isNull(student.getFirstName()) || Objects.isNull(student.getLastName())) {
+            logger.info("Impossible add incorrect student");
+            return;
+        }
         entityManager.merge(student);
         logger.info("Add new student: " + student.toString());
     }
 
-    public void updateStudent(Student student) {
-        entityManager.persist(student);
-        logger.info("Update student: " + student.toString());
-    }
 }
 
