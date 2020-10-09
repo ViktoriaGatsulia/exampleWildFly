@@ -26,7 +26,7 @@
         <td style="width: 20%">{{student.dateOfBirth}}</td>
         <td style="width: 20%">
             <div class="button-group" style="align: center; width: 100%;">
-                <button class="button"  ng-click="deleteStudent(student.id)">Удалить</button>
+                <button class="button" ng-click="deleteStudent(student.id)">Удалить</button>
             </div>
         </td>
     </tr>
@@ -43,12 +43,14 @@
     </div>
     <div class="form-group">
         <label for="inputEmail">Электронная почта</label>
-        <input ng-model="student.email" type="email" class="form-control" id="inputEmail" placeholder="name@example.ru" aria-describedby="emailHelp" required>
+        <input ng-model="student.email" type="email" class="form-control" id="inputEmail" placeholder="name@example.ru"
+               aria-describedby="emailHelp" required>
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
         <label for="inputDateOfBirth">Дата рождения</label>
-        <input ng-model="student.dateOfBirth" class="form-control" id="inputDateOfBirth" placeholder="ГГГГ-ММ-ДД" required>
+        <input ng-model="student.dateOfBirth" class="form-control" id="inputDateOfBirth" placeholder="ГГГГ-ММ-ДД"
+               required>
     </div>
 
     <div class="button-group">
@@ -102,18 +104,19 @@
             });
         }
 
-        $scope.deleteStudent = function(id_delete) {
+        $scope.deleteStudent = function (id_delete) {
             console.log(id_delete)
             $http({
                 url: '/brandMaker/app/main/delete_id=' + id_delete,
                 method: 'DELETE',
-            }).then(function(response){
+            }).then(function (response) {
                 $scope.getStudent();
                 console.log("delete student");
             });
         }
 
     });
+
 
 </script>
 
