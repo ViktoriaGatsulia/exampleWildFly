@@ -12,19 +12,36 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+/**
+ * Web-контроллер
+ *
+ * @author ViktoriaGatsulia
+ * @version 1.0
+ */
 @RequestScoped
 @Path("main")
 public class MainController {
 
+    /**
+     * Переменная для логирования
+     */
     @Inject
     private Logger logger;
 
+    /**
+     * Репозиторий студентов
+     */
     @Inject
     private StudentRepository studentRepository;
 
-    /*
-    http://127.0.0.1:8080/brandMaker/app/main/all
-    */
+    /**
+     * Get-метод для поиска всех студентов
+     * <p>
+     * Пример curl запроса:
+     * curl 'http://127.0.0.1:8080/brandMaker/app/main/all'
+     *
+     * @return - список найденных студентов
+     */
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
@@ -33,9 +50,14 @@ public class MainController {
         return studentRepository.getAll();
     }
 
-    /*
-    http://127.0.0.1:8080/brandMaker/app/main/1
-    */
+    /**
+     * Get-метод для поиска студента по id
+     * <p>
+     * Пример curl запроса:
+     * curl 'http://127.0.0.1:8080/brandMaker/app/main/1'
+     *
+     * @return - найденный студент или ошибка 404 если пользователя не существует
+     */
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -47,8 +69,11 @@ public class MainController {
         return Response.ok(student).build();
     }
 
-    /*
-    curl -X DELETE 'localhost:8080/brandMaker/app/main/delete_id=4'
+    /**
+     * Delete-метод для удаления студента по id
+     * <p>
+     * Пример curl запроса:
+     * curl -X DELETE 'localhost:8080/brandMaker/app/main/delete_id=4'
      */
     @DELETE
     @Path("delete_id={id}")
@@ -58,9 +83,12 @@ public class MainController {
         studentRepository.removeStudentById(id);
     }
 
-    /*
-    curl -X PUT -H 'Content-Type:application/json' -d '{"dateOfBirth" : "2000-07-31", "email" : "vova@gmail.com", "firstName" : "Vladimir", "lastName" : "Gatsulia"}' 'localhost:8080/brandMaker/app/main/add'
-    */
+    /**
+     * Put-метод для добавления студента
+     * <p>
+     * Пример curl запроса:
+     * curl -X PUT -H 'Content-Type:application/json' -d '{"dateOfBirth" : "2000-07-31", "email" : "vova@gmail.com", "firstName" : "Vladimir", "lastName" : "Gatsulia"}' 'localhost:8080/brandMaker/app/main/add'
+     */
     @PUT
     @Path("add")
     @Produces(MediaType.APPLICATION_JSON)
@@ -71,6 +99,7 @@ public class MainController {
 
 }
 /*
+mvn clean install
 mvn wildfly:deploy
 mvn wildfly:redeploy
 mvn wildfly:undeploy

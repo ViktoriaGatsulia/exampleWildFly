@@ -13,21 +13,45 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+
+/**
+ * Репозиторий для сущности Студент
+ *
+ * @author ViktoriaGatsulia
+ * @version 1.0
+ */
 @Transactional
 @ApplicationScoped
 public class StudentRepository {
 
+    /**
+     * Переменная логирования
+     */
     @Inject
     private Logger logger;
 
+    /**
+     * Переменная менеджера сущностей
+     */
     @Inject
     private EntityManager entityManager;
 
+    /**
+     * Метод для поиска студента по id
+     *
+     * @param id - идентификатор искомого студента
+     * @return - найденный студент
+     */
     public Student getById(long id) {
         logger.info("Get Student by id: " + id);
         return entityManager.find(Student.class, id);
     }
 
+    /**
+     * Метод для поиска всех студентов
+     *
+     * @return - список найденных студентов
+     */
     public List<Student> getAll() {
         logger.info("Get all student");
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -36,6 +60,11 @@ public class StudentRepository {
         return entityManager.createQuery(criteria).getResultList();
     }
 
+    /**
+     * Метод для удаления студента по id
+     *
+     * @param id - идентификатор удаляемого студента
+     */
     public void removeStudentById(Long id) {
         Student student = entityManager.find(Student.class, id);
         if (Objects.isNull(student)) {
@@ -46,6 +75,11 @@ public class StudentRepository {
         logger.info("Remove student by id=" + id);
     }
 
+    /**
+     * Метод для добавления нового студента
+     *
+     * @param student - добавляемый студент
+     */
     public void addStudent(Student student) {
         if (Objects.isNull(student)) {
             logger.info("Impossible add incorrect student");
