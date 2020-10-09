@@ -41,19 +41,19 @@
 ### 1. Создать базу данных
 1. Зайти в консоль mySQL из под root
 
-    $ sudo mysql -u root
+    ````$ sudo mysql -u root````
 2. Создать пользователя БД
 
-    $ CREATE USER 'user_name'@'localhost' IDENTIFIED BY 'password';
+    ````$ CREATE USER 'user_name'@'localhost' IDENTIFIED BY 'password';````
 3. Чтобы назначить созданном пользователю неограниченные права доступа к базе данных, выполните следующую команду
 
-    $ GRANT ALL PRIVILEGES ON * . * TO 'user_name'@'localhost';
+    ````$ GRANT ALL PRIVILEGES ON * . * TO 'user_name'@'localhost';````
 4. Проверьте результат ещё раз войдя в mysql-консоль
 
-    $ mysql -u user_name -p
+    ````$ mysql -u user_name -p````
 5. Создайте новую БД
 
-    $ CREATE DATABASES 'university'
+    ````$ CREATE DATABASES 'university'````
     
 **(не следует созадавать новую БД под root, т.к. в последних версиях mySQL для root пользователя используется не пароль а auth_socket)**  
 
@@ -76,7 +76,7 @@
 
 Проект собирается с помощью команды mvn, собранный war-файл будет находиться в папке target
 
-    ````$ mvn clean install````
+````$ mvn clean install````
 
 ### 3. Деплой проекта
 
