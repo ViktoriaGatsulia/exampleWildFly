@@ -1,3 +1,6 @@
+![hibernate](https://www.edureka.co/blog/wp-content/uploads/2019/07/Hibernate-Java-frameworks-Edureka-1.png)
+![wildfly](https://design.jboss.org/wildfly/logo/final/wildfly_logomark.svg)
+![maven](https://habrastorage.org/webt/5a/f3/22/5af322981410c538019113.png)
 # Web-приложение с таблицей, содержащей пользователей
 
 **exampleWildFly** - это лёгкое web-приложение для работы с таблицей студентов, имеющее следующий **функционал**:
@@ -7,7 +10,7 @@
   * Ввести данные студента в соответствующие поля и нажать кнопку ````Сохранить студента````              
   * С помощью curl запроса:        
   
-````curl -X PUT -H 'Content-Type:application/json' -d '{"dateOfBirth" : "2000-07-31", "email" : "vova@gmail.com", "firstName" : "Vladimir", "lastName" : "Gatsulia"}' 'localhost:8080/brandMaker/app/main/add'````        
+````curl -X PUT -H 'Content-Type:application/json' -d '{"dateOfBirth" : "2001-08-14", "email" : "viki@gmail.com", "firstName" : "Viktoria", "lastName" : "Gatsulia"}' 'localhost:8080/brandMaker/app/main/add'````        
         
 **Удаление студента**
 
