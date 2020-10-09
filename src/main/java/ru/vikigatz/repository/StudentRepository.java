@@ -40,15 +40,13 @@ public class StudentRepository {
         Student student = entityManager.find(Student.class, id);
         if (Objects.isNull(student)) {
             logger.info("Student from id=" + id + "does not exist, remove impossible");
+            return;
         }
         entityManager.remove(student);
         logger.info("Remove student by id=" + id);
-//        entityManager.flush();
-//        entityManager.clear();
     }
 
     public void addStudent(Student student) {
-        logger.info("SOOOOOOOOOOOOS + " + Objects.isNull(student));
         entityManager.merge(student);
         logger.info("Add new student: " + student.toString());
     }

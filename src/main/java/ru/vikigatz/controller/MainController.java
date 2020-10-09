@@ -2,7 +2,6 @@ package ru.vikigatz.controller;
 
 import ru.vikigatz.entity.Student;
 import ru.vikigatz.repository.StudentRepository;
-import ru.vikigatz.service.StudentService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -34,6 +33,9 @@ public class MainController {
         return studentRepository.getAll();
     }
 
+    /*
+    http://127.0.0.1:8080/brandMaker/app/main/1
+    */
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -45,6 +47,9 @@ public class MainController {
         return Response.ok(student).build();
     }
 
+    /*
+    curl -X DELETE 'localhost:8080/brandMaker/app/main/delete_id=4'
+     */
     @DELETE
     @Path("delete_id={id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -54,7 +59,7 @@ public class MainController {
     }
 
     /*
-    curl -h" : "2000-07-31", "email" : "vova@gmail.com", "firstName" : "Vladimir", "lastName" : "Gatsulia"}' 'localhost:8080/brandMaker/app/main/add'
+    curl -X PUT -H 'Content-Type:application/json' -d '{"dateOfBirth" : "2000-07-31", "email" : "vova@gmail.com", "firstName" : "Vladimir", "lastName" : "Gatsulia"}' 'localhost:8080/brandMaker/app/main/add'
     */
     @PUT
     @Path("add")
